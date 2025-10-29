@@ -65,17 +65,17 @@ index_base <- index_base %>%
 # ---------- Classify A/B/C/D ----------
 set_thr   <- 280
 ratio_thr <- 0.32
+eps <- 1e-9  # tolerance for floating point
 
 index_base <- index_base %>%
   mutate(
-    ClassABCD = dplyr::case_when(
-      SET1 > set_thr  & TAPSE1_PSAP1 > ratio_thr ~ "A",
-      SET1 < set_thr  & TAPSE1_PSAP1 > ratio_thr ~ "B",
-      SET1 > set_thr  & TAPSE1_PSAP1 < ratio_thr ~ "C",
-      SET1 < set_thr  & TAPSE1_PSAP1 < ratio_thr ~ "D",
-      TRUE ~ NA_character_  # equals to threshold or missing -> NA
-    ),
-    ClassABCD = factor(ClassABCD, levels = c("A","B","C","D"))
+    ClassABCD = case_when(
+      SET1 >= set_thr - eps & TAPSE1_PSAP1 >= ratio_thr - eps ~ "A",
+      SET1 <  set_thr - eps & TAPSE1_PSAP1 >= ratio_thr - eps ~ "B",
+      SET1 >= set_thr - eps & TAPSE1_PSAP1 <  ratio_thr - eps ~ "C",
+      SET1 <  set_thr - eps & TAPSE1_PSAP1 <  ratio_thr - eps ~ "D",
+      TRUE ~ NA_character_
+    )
   )
 
 # Optional: if you want to drop rows that landed in NA (exactly on a threshold)

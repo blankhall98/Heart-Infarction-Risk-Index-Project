@@ -1,0 +1,6 @@
+endpoint,endpoint_label,median_A,median_B,median_C,median_D
+MACE_días,Any MACE,NA,NA,NA,NA
+MUERTECV_días,Cardiovascular Death,NA,NA,NA,NA
+REINFARTO_días,Reinfarction,NA,NA,NA,NA
+CHOQUE_días,Shock,NA,NA,NA,NA
+SANGRADOMAYOR_días,Major Bleeding,NA,NA,NA,NA
